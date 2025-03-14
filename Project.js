@@ -2,15 +2,24 @@ const loaddata=(global)=>{
 
     const searchText=document.getElementById("search-box").value;
     console.log(searchText);
+
+    const mealsContainer = document.getElementById("meals-container");
+    mealsContainer.innerHTML = "";  
+    document.getElementById("total-meals").innerText = "0";
+
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchText ? searchText:global}`)
     .then(res=>res.json())
-    .then((data)=> displayData(data.meals));
+    .then((data)=> {
+      displayData(data.meals)
+      console.log(data.meals)
+});
 }
 
 const displayData=(data)=>{
    document.getElementById("total-meals").innerText=data.length;
    const mealsContainer = document.getElementById("meals-container");
 
+   mealsContainer.innerHTML = " ";
 
    data.forEach((meal) => {
     console.log(meal);
